@@ -30,7 +30,48 @@ function getAllDetailsForPlayedGameId(playedGameId) {
 	return onePlayedGame;
 }
 
-function createNewPlayedGame() {}
+function createNewPlayedGame(data) {
+	if (!data.played_date) {
+		console.error("No date found");
+		return;
+	}
+	if (!data.winner) {
+		console.error("No winner specified");
+		return;
+	}
+	if (!data.game_id) {
+		console.error("No valid game id specified");
+		return;
+	}
+
+	const played_date = data.played_date;
+	const winner_id = data.winner.id;
+	const game_id = data.game_id;
+	// Insert the played game
+	const played_game_id = db.insertNewPlayedGame(
+		played_date,
+		game_id,
+		winner_id
+	);
+	// Check if it was created:
+	const newlyCreatedPlayedGame = db.queryPlayedGameFromId(played_game_id);
+	if (!newlyCreatedPlayedGame) {
+		console.error("No game found");
+		return;
+	}
+	//Create all the plays:
+	//First add winner to players:
+	data.players.push(data.winner);
+	//loop through each player and add as a play:
+	data.players.forEach((player) => {
+		db.insertNewPlay(
+			played_game_id,
+			player.id,
+			player.score ? player.score : 0
+		);
+	});
+	return played_game_id;
+}
 
 module.exports = {
 	getAllPlayedGameDetails,

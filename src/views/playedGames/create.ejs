@@ -13,6 +13,20 @@
 			<div class="container">
 				<h1 class="title">Tilføj Nyt Spillet Spil</h1>
 				<form action="/played-games/new" method="POST">
+					<!-- Game Picker -->
+					<div class="field">
+						<label class="label">Spil</label>
+						<div class="control">
+							<div class="select">
+								<select name="game_id" required>
+									<option value="">Vælg et spil</option>
+									<% games.forEach(game => { %>
+									<option value="<%= game.id %>"><%= game.title %></option>
+									<% }); %>
+								</select>
+							</div>
+						</div>
+					</div>
 					<div class="field">
 						<label class="label">Spildato</label>
 						<div class="control">

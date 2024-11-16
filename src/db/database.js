@@ -68,9 +68,18 @@ const QUERY_ALL_PLAYS_FROM_PLAYED_GAME_ID = db.prepare(
     JOIN players ON players.id = plays.player_id
     WHERE plays.played_game_id = ?`
 );
+const QUERY_PLAYED_GAME_FROM_ID = db.prepare(
+	"SELECT * FROM played_games WHERE played_games.id = ?"
+);
 
 const INSERT_INTO_GAMES = db.prepare(
 	"INSERT INTO games (title, description, img_source) VALUES (?, ?, ?)"
+);
+const INSERT_INTO_PLAYED_GAMES = db.prepare(
+	"INSERT INTO played_games (played_date, game_id, winner_id) VALUES (?, ?, ?)"
+);
+const INSERT_INTO_PLAYS = db.prepare(
+	"INSERT INTO plays (played_game_id, player_id, score) VALUES (?, ?, ?)"
 );
 /**
  * Utility functions
@@ -120,6 +129,22 @@ function queryPlaysFromPlayedGameId(id) {
 	const plays = QUERY_ALL_PLAYS_FROM_PLAYED_GAME_ID.all(id);
 	return plays;
 }
+function queryPlayedGameFromId(id) {
+	const playedGame = QUERY_PLAYED_GAME_FROM_ID.get(id);
+	return playedGame;
+}
+function insertNewPlayedGame(played_date, game_id, winner_id) {
+	// TODO: check if game_id is actually a valid game id.
+	// Same for winner_id
+	const result = INSERT_INTO_PLAYED_GAMES.run(played_date, game_id, winner_id);
+	const playedGameId = result.lastInsertRowid;
+	return playedGameId;
+}
+function insertNewPlay(played_game_id, player_id, score) {
+	// TODO: check if played game exists, and player id.
+	const result = INSERT_INTO_PLAYS.run(played_game_id, player_id, score);
+	return result.lastInsertRowid;
+}
 
 // Export the functions for usage
 module.exports = {
@@ -130,4 +155,7 @@ module.exports = {
 	insertNewGame,
 	queryImgSourceFromGameId,
 	queryPlaysFromPlayedGameId,
+	insertNewPlay,
+	insertNewPlayedGame,
+	queryPlayedGameFromId,
 };
