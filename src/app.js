@@ -9,9 +9,11 @@ app.set("views", path.join(__dirname, "views"));
 
 // Import the different routes
 const gameRoutes = require("./routes/games");
+const playerRoutes = require("./routes/players");
 
 // Use the routes
 app.use("/games", gameRoutes);
+app.use("/players", playerRoutes);
 
 app.get("/", (req, res) => {
 	res.redirect("/games");
