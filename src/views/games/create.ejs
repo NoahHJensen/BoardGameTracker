@@ -8,7 +8,71 @@
 	</head>
 	<body>
 		<%- include('../partials/header.ejs') %>
-		<section class="section"><h1 class="title">Tilføj et nyt spil</h1></section>
+		<section class="section">
+			<!-- Container for the form -->
+			<div class="container">
+				<h1 class="title has-text-centered">Tilføj et nyt spil</h1>
+
+				<form action="/submit-game" method="POST">
+					<!-- Game Title -->
+					<div class="field">
+						<label class="label" for="title">Spillets titel</label>
+						<div class="control">
+							<input
+								class="input"
+								type="text"
+								id="title"
+								name="title"
+								placeholder="Skriv navnet på spillet"
+								required />
+						</div>
+					</div>
+
+					<!-- Game Description -->
+					<div class="field">
+						<label class="label" for="gameDescription"
+							>Spillets beskrivelse</label
+						>
+						<div class="control">
+							<textarea
+								class="textarea"
+								id="gameDescription"
+								name="description"
+								placeholder="Skriv en beskrivelse af hvad spillet går ud på"
+								required></textarea>
+						</div>
+					</div>
+
+					<!-- Game Image Source -->
+					<div class="field">
+						<label class="label" for="gameImage"
+							>Billede URL.
+							<a class="link" href="https://boardgamegeek.com/" target="_blank"
+								>kan findes her</a
+							></label
+						>
+						<div class="control">
+							<input
+								class="input"
+								type="url"
+								id="gameImage"
+								name="img_source"
+								placeholder="Indtast billedets URL for spillet"
+								required />
+						</div>
+					</div>
+
+					<!-- Submit Button -->
+					<div class="field">
+						<div class="control">
+							<button class="button is-primary" type="submit">
+								Tilføj spil
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
 		<%- include('../partials/footer')%>
 	</body>
 </html>
