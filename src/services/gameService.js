@@ -1,6 +1,6 @@
 // Responsible for handling data directly from the database and convert to usable stuff.
 const db = require("../dummyData"); // Dummy database for now... shhh
-
+const dbReal = require("../db/database");
 /**
  * Helper function for calculating how long ago a date was.
  */
@@ -23,7 +23,14 @@ function timeAgo(dateString) {
  */
 function getAllGameDetails() {
 	let games = db.games;
-
+	dbReal
+		.queryAllGames()
+		.then((gs) => {
+			console.log(gs);
+		})
+		.catch((err) => {
+			console.log("Error happended", err);
+		});
 	let latestGamesMap = new Map();
 	let gamePlayedCountMap = new Map();
 	db.playedGames.forEach((playedGame) => {
