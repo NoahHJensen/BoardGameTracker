@@ -23,29 +23,30 @@
 					<div class="field is-grouped is-grouped-multiline">
 						<div class="control">
 							<div class="tags has-addons">
-								<span class="tag is-dark is-medium">Spil vundet</span>
-								<span class="tag is-primary is-medium"
-									><%= player.games_won %></span
+								<span class="tag is-dark is-large"
+									>Total (<abbr title="Spillet / Vundet / Tabt">S/V/T</abbr
+									>)</span
 								>
-							</div>
-						</div>
-						<div class="control">
-							<div class="tags has-addons">
-								<span class="tag is-dark is-medium">Spil spillede</span>
-								<span class="tag is-info is-medium"
-									><%= player.games_played %></span
+								<strong class="tag is-info is-large"
+									><%= player.games_played %></strong
+								>
+								<strong class="tag is-success is-large"
+									><%= player.games_won %></strong
+								>
+								<strong class="tag is-danger is-large"
+									><%= player.games_played - player.games_won %></strong
 								>
 							</div>
 						</div>
 						<% if (player.games_played !== 0) { %>
 						<div class="control">
 							<div class="tags has-addons">
-								<span class="tag is-dark is-medium">Vundet procent</span>
+								<span class="tag is-dark is-large">Vundet procent</span>
 								<% let winPercentage = Math.round(((player.games_won /
 								player.games_played) * 100)*100)/100%>
-								<span
-									class="tag <% if (winPercentage >= 50) { %> is-success <% } else { %> is-danger <% } %>is-medium">
-									<%= winPercentage %>%</span
+								<strong
+									class="tag <% if (winPercentage >= 50) { %> is-success <% } else { %> is-danger <% } %>is-large">
+									<%= winPercentage %>%</strong
 								>
 							</div>
 						</div>

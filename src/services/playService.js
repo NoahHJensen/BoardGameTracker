@@ -26,7 +26,6 @@ function getAllDetailsForPlayedGameId(playedGameId) {
 		onePlayedGame.game_id
 	).img_source;
 	onePlayedGame.allPlays = db.queryPlaysFromPlayedGameId(playedGameId);
-	console.log(onePlayedGame);
 	return onePlayedGame;
 }
 
