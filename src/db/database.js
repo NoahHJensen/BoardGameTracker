@@ -27,6 +27,23 @@ const QUERY_ALL_GAME_DETAILS = db.prepare(`
   `);
 const QUERY_GAME_FROM_ID = db.prepare("SELECT * FROM games WHERE id = ?");
 
+const QUERY_ALL_PLAYER_DETAILS = db.prepare(`
+    SELECT 
+        players.id,
+        players.name,
+        COALESCE(games_played.gamesPlayed, 0) AS gamesPlayed,
+        COALESCE(games_won.gamesWon, 0) AS gamesWon
+    FROM players
+        LEFT JOIN (
+                    SELECT player_id, COUNT(DISTINCT id) AS gamesPlayed
+                    FROM plays
+                    GROUP BY player_id
+                    ) AS games_played ON games_played.player_id = players.id
+        LEFT JOIN (
+                    SELECT winner_id, COUNT(DISTINCT id) AS gamesWon
+                    FROM played_games
+                    GROUP BY winner_id
+                    ) AS games_won ON games_won.winner_id = players.id;`);
 /**
  * Utility functions
  */
@@ -51,5 +68,14 @@ function queryGameFromId(id) {
 	return game;
 }
 
+function queryAllPlayerDetails() {
+	const playerDetails = QUERY_ALL_PLAYER_DETAILS.all();
+	return playerDetails;
+}
+
 // Export the functions for usage
-module.exports = { queryAllGameDetails, queryGameFromId };
+module.exports = {
+	queryAllGameDetails,
+	queryGameFromId,
+	queryAllPlayerDetails,
+};
