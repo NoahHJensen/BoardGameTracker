@@ -31,8 +31,8 @@ const QUERY_ALL_PLAYER_DETAILS = db.prepare(`
     SELECT 
         players.id,
         players.name,
-        COALESCE(games_played.gamesPlayed, 0) AS gamesPlayed,
-        COALESCE(games_won.gamesWon, 0) AS gamesWon
+        COALESCE(games_played.gamesPlayed, 0) AS games_played,
+        COALESCE(games_won.gamesWon, 0) AS games_won
     FROM players
         LEFT JOIN (
                     SELECT player_id, COUNT(DISTINCT id) AS gamesPlayed

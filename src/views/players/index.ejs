@@ -25,7 +25,7 @@
 							<div class="tags has-addons">
 								<span class="tag is-dark is-medium">Spil vundet</span>
 								<span class="tag is-primary is-medium"
-									><%= player.gamesWon %></span
+									><%= player.games_won %></span
 								>
 							</div>
 						</div>
@@ -33,16 +33,16 @@
 							<div class="tags has-addons">
 								<span class="tag is-dark is-medium">Spil spillede</span>
 								<span class="tag is-info is-medium"
-									><%= player.gamesPlayed %></span
+									><%= player.games_played %></span
 								>
 							</div>
 						</div>
-						<% if (player.gamesPlayed !== 0) { %>
+						<% if (player.games_played !== 0) { %>
 						<div class="control">
 							<div class="tags has-addons">
 								<span class="tag is-dark is-medium">Vundet procent</span>
-								<% let winPercentage = Math.round(((player.gamesWon /
-								player.gamesPlayed) * 100)*100)/100%>
+								<% let winPercentage = Math.round(((player.games_won /
+								player.games_played) * 100)*100)/100%>
 								<span
 									class="tag <% if (winPercentage >= 50) { %> is-success <% } else { %> is-danger <% } %>is-medium">
 									<%= winPercentage %>%</span
