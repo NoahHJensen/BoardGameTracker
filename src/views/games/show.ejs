@@ -36,11 +36,12 @@
 		<section class="section">
 			<div class="container">
 				<p class="title">Viser alle spillede spil for <%= game.title %></p>
-				<table class="table">
+				<table class="table is-fullwidth is-hoverable">
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>Dato</th>
+							<th>Tid siden</th>
 							<th>Vinder</th>
 						</tr>
 					</thead>
@@ -50,6 +51,7 @@
 						<tr>
 							<th><%= play.id %></th>
 							<td><%= play.played_date %></td>
+							<td><%= play.timeAgo %></td>
 							<td><%= play.winner_name %></td>
 						</tr>
 						<% }) %>
