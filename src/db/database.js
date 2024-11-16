@@ -44,12 +44,25 @@ const QUERY_ALL_PLAYER_DETAILS = db.prepare(`
                     FROM played_games
                     GROUP BY winner_id
                     ) AS games_won ON games_won.winner_id = players.id;`);
+
+const QUERY_ALL_PLAYED_GAME_DETAILS = db.prepare(`
+    SELECT 
+        played_games.id,
+        played_games.game_id,
+        played_games.played_date,
+        played_games.winner_id,
+        COALESCE(players.name, 'Ingen vinder') AS winner_name
+    FROM played_games
+    LEFT JOIN players ON players.id = played_games.winner_id;`);
+
 /**
  * Utility functions
  */
 const timeAgo = require("../utils/timeAgo");
 
-// All functions
+/**
+ * All database functions
+ */
 
 function queryAllGameDetails() {
 	const games = QUERY_ALL_GAME_DETAILS.all();
@@ -72,10 +85,15 @@ function queryAllPlayerDetails() {
 	const playerDetails = QUERY_ALL_PLAYER_DETAILS.all();
 	return playerDetails;
 }
+function getAllPlayedGameDetails() {
+	const plays = QUERY_ALL_PLAYED_GAME_DETAILS.all();
+	return plays;
+}
 
 // Export the functions for usage
 module.exports = {
 	queryAllGameDetails,
 	queryGameFromId,
 	queryAllPlayerDetails,
+	getAllPlayedGameDetails,
 };

@@ -6,7 +6,6 @@ const db = require("../db/database");
  */
 function getAllPlayerDetails() {
 	let playerDetails = db.queryAllPlayerDetails();
-	console.log(playerDetails);
 	return playerDetails;
 }
 
