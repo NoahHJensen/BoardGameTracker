@@ -131,20 +131,8 @@ let playedGames = [
 	},
 	{
 		id: 5,
-		game_id: 3,
-		play_date: "2024-10-10",
-		winner_id: 1,
-	},
-	{
-		id: 6,
-		game_id: 4,
-		play_date: "2024-10-15",
-		winner_id: 2,
-	},
-	{
-		id: 7,
 		game_id: 1,
-		play_date: "2024-11-29",
+		play_date: "2024-11-15",
 		winner_id: 1,
 	},
 ];
@@ -197,6 +185,18 @@ let plays = [
 		played_game_id: 4,
 		player_id: 4,
 		score: 185,
+	},
+	{
+		id: 9,
+		played_game_id: 5,
+		player_id: 1,
+		score: 100,
+	},
+	{
+		id: 10,
+		played_game_id: 5,
+		player_id: 2,
+		score: 68,
 	},
 ];
 

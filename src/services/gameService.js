@@ -38,9 +38,17 @@ function getAllGameDetails() {
 		}
 	});
 	games.forEach((game) => {
-		game.lastPlayedGame = latestGamesMap.get(game.id);
-		game.lastPlayedAgo = timeAgo(game.lastPlayedGame.play_date);
-		game.playedCount = gamePlayedCountMap.get(game.id);
+		// Ensure the game actually has been played
+		let lastPlayedGame = latestGamesMap.get(game.id);
+		if (lastPlayedGame) {
+			game.lastPlayedGame = lastPlayedGame;
+			game.lastPlayedAgo = timeAgo(game.lastPlayedGame.play_date);
+		} else {
+			game.lastPlayedGame = null;
+			game.lastPlayedAgo = "Ikke spillet endnu";
+		}
+
+		game.playedCount = gamePlayedCountMap.get(game.id) || 0;
 	});
 	return games;
 }
