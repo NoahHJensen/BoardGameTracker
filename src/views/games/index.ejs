@@ -6,7 +6,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title><%= title %></title>
 	</head>
-
+	<style>
+		.img-container {
+			width: 123px;
+			height: 150px;
+		}
+	</style>
 	<body>
 		<%- include('../partials/header.ejs') %>
 		<section class="hero is-primary">
@@ -27,8 +32,8 @@
 				<% games.forEach(game=> { %>
 				<div class="box">
 					<article class="media">
-						<figure class="media-left">
-							<p class="image is-128x128">
+						<figure class="media-left img-container">
+							<p class="image is-4by5">
 								<img src="<%= game.img_source %>" />
 							</p>
 						</figure>
