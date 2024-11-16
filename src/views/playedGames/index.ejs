@@ -16,6 +16,7 @@
 		<section class="section">
 			<div class="container">
 				<h1 class="title has-text-centered">Alle spillede spil</h1>
+				<button class="button" onclick="newGame()">Tilføj nyt spil</button>
 				<div class="table-container">
 					<table class="table is-fullwidth is-hoverable">
 						<thead>
@@ -47,6 +48,9 @@
 	<script>
 		function viewGame(id) {
 			window.location.href = `/played-games/info/${id}`;
+		}
+		function newGame() {
+			window.location.href = `/played-games/new`;
 		}
 	</script>
 </html>
