@@ -4,11 +4,39 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<%- include('../partials/libs.ejs') %>
-		<title>Spil</title>
+		<title>Spillet spil</title>
 	</head>
 	<body>
 		<%- include('../partials/header.ejs') %>
-		<div class="container"></div>
+		<section class="section">
+			<div class="container">
+				<h1 class="title has-text-centered">Alle spillede spil</h1>
+				<div class="table-container">
+					<table class="table is-fullwidth is-hoverable">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Brætspil</th>
+								<th>Dato</th>
+								<th>Tid siden</th>
+								<th>Vinder</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% playedGames.forEach((game, index) => { %>
+							<tr>
+								<td><%= index + 1 %></td>
+								<td><%= game.title %></td>
+								<td><%= game.played_date %></td>
+								<td><%= game.timeAgo %></td>
+								<td><%= game.winner_name %></td>
+							</tr>
+							<% }); %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
 		<%- include('../partials/footer.ejs') %>
 	</body>
 </html>

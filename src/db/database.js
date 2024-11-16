@@ -49,11 +49,13 @@ const QUERY_ALL_PLAYED_GAME_DETAILS = db.prepare(`
     SELECT 
         played_games.id,
         played_games.game_id,
+        games.title,
         played_games.played_date,
         played_games.winner_id,
         COALESCE(players.name, 'Ingen vinder') AS winner_name
     FROM played_games
-    LEFT JOIN players ON players.id = played_games.winner_id;`);
+    LEFT JOIN players ON players.id = played_games.winner_id
+    LEFT JOIN games ON games.id = played_games.game_id;`);
 
 const INSERT_INTO_GAMES = db.prepare(
 	"INSERT INTO games (title, description, img_source) VALUES (?, ?, ?)"

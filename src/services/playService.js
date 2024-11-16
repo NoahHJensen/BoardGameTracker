@@ -1,8 +1,14 @@
 // Responsible for all played game related data
 const db = require("../db/database");
 
+//Helper util function
+const timeAgo = require("../utils/timeAgo");
+
 function getAllPlayedGameDetails() {
 	const plays = db.getAllPlayedGameDetails();
+	plays.forEach((play) => {
+		play.timeAgo = timeAgo(play.played_date);
+	});
 	return plays;
 }
 
