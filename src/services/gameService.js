@@ -23,14 +23,9 @@ function timeAgo(dateString) {
  */
 function getAllGameDetails() {
 	let games = db.games;
-	dbReal
-		.queryAllGames()
-		.then((gs) => {
-			console.log(gs);
-		})
-		.catch((err) => {
-			console.log("Error happended", err);
-		});
+
+	console.log(dbReal.queryAllGames());
+
 	let latestGamesMap = new Map();
 	let gamePlayedCountMap = new Map();
 	db.playedGames.forEach((playedGame) => {
