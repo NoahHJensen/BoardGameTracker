@@ -14,7 +14,15 @@ function getGameFromId(id) {
 	return game;
 }
 
+function addNewGameToDatabase(game) {
+	const title = game.title;
+	const description = game.description;
+	const img_source = game.img_source;
+	db.insertNewGame(title, description, img_source);
+}
+
 module.exports = {
 	getAllGameDetails,
 	getGameFromId,
+	addNewGameToDatabase,
 };

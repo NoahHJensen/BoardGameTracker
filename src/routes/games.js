@@ -27,6 +27,8 @@ router.get("/create", (req, res) => {
 
 // POST req Route for form submit
 router.post("/create", (req, res) => {
+	const gameData = req.body;
+	gameService.addNewGameToDatabase(gameData);
 	res.redirect("/");
 });
 

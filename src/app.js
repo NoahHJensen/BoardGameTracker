@@ -3,6 +3,9 @@ const path = require("path");
 
 const app = express();
 
+// Middleware for parsing URL-encoded data (from forms)
+app.use(express.urlencoded({ extended: true }));
+
 // Use the EJS view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));

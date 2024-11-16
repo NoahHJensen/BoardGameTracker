@@ -55,6 +55,9 @@ const QUERY_ALL_PLAYED_GAME_DETAILS = db.prepare(`
     FROM played_games
     LEFT JOIN players ON players.id = played_games.winner_id;`);
 
+const INSERT_INTO_GAMES = db.prepare(
+	"INSERT INTO games (title, description, img_source) VALUES (?, ?, ?)"
+);
 /**
  * Utility functions
  */
@@ -90,10 +93,15 @@ function getAllPlayedGameDetails() {
 	return plays;
 }
 
+function insertNewGame(title, desc, url) {
+	INSERT_INTO_GAMES.run(title, desc, url);
+}
+
 // Export the functions for usage
 module.exports = {
 	queryAllGameDetails,
 	queryGameFromId,
 	queryAllPlayerDetails,
 	getAllPlayedGameDetails,
+	insertNewGame,
 };
