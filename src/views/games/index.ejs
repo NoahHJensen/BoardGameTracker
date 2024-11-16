@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="dk">
+	<head>
+		<%- include('../partials/libs.ejs') %>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%= title %></title>
+	</head>
+
+	<body>
+		<%- include('../partials/header.ejs') %>
+		<section class="hero is-primary">
+			<div class="hero-body">
+				<p class="title"><%= title %></p>
+				<p class="subtitle">Her er listen af alle vores nuværende spil.</p>
+			</div>
+		</section>
+		<section class="section">
+			<div class="container">
+				<h1 class="title"></h1>
+
+				<% games.forEach(game=> { %>
+				<div class="box">
+					<article class="media">
+						<figure class="media-left">
+							<p class="image is-128x128">
+								<img src="<%= game.imgSource %>" />
+							</p>
+						</figure>
+						<div class="media-content">
+							<h1 class="title is-3"><%= game.gameTitle %></h1>
+							<h2 class="subtitle is-5"><%= game.description %></h2>
+							<div class="level">
+								<div class="tags">
+									<span class="tag is-info is-medium">
+										Antal gange spillet: <%= game.playedCount %>
+									</span>
+									<span class="tag is-link is-medium">
+										Sidst spillet: <%= game.lastPlayedAgo %>
+									</span>
+									<span class="tag is-success is-medium">
+										Rating: <%= game.rating %>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="media-right">
+							<button class="button">Tilføj spil</button>
+							<button class="button" onclick="viewGame('<%=game.id %>')">
+								Spil statistik
+							</button>
+						</div>
+					</article>
+				</div>
+				<% }) %>
+			</div>
+		</section>
+		<%- include('../partials/footer') %>
+	</body>
+	<script>
+		function viewGame(id) {
+			window.location.href = `/games/${id}`;
+		}
+	</script>
+</html>

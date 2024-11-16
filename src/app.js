@@ -1,0 +1,24 @@
+const express = require("express");
+const path = require("path");
+
+const app = express();
+
+// Use the EJS view engine
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+// Import the different routes
+const gameRoutes = require("./routes/games");
+
+// Use the routes
+app.use("/games", gameRoutes);
+
+app.get("/", (req, res) => {
+	res.redirect("/games");
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000; // Default to 3000
+app.listen(PORT, () => {
+	console.log(`Server running on http://localhost:${PORT}`);
+});
