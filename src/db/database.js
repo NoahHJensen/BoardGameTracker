@@ -4,8 +4,9 @@ const Database = require("better-sqlite3");
 // Get a connection to the database
 const db = new Database("src/db/bgtracker.db");
 
-// Prepare statements
-
+/**
+ * Prepare SQL statements
+ */
 // ty chatgpt
 const QUERY_ALL_GAME_DETAILS = db.prepare(`
     SELECT
@@ -24,6 +25,7 @@ const QUERY_ALL_GAME_DETAILS = db.prepare(`
     ORDER BY
         games.id;
   `);
+const QUERY_GAME_FROM_ID = db.prepare("SELECT * FROM games WHERE id = ?");
 
 /**
  * Utility functions
@@ -43,34 +45,11 @@ function queryAllGameDetails() {
 	});
 	return games;
 }
-/**
- * let latestGamesMap = new Map();
-	let gamePlayedCountMap = new Map();
-	db.playedGames.forEach((playedGame) => {
-		let gameId = playedGame.game_id;
-		gamePlayedCountMap.set(gameId, (gamePlayedCountMap.get(gameId) || 0) + 1);
-		if (
-			!latestGamesMap.has(gameId) ||
-			new Date(playedGame.play_date) >
-				new Date(latestGamesMap.get(gameId).play_date)
-		) {
-			latestGamesMap.set(gameId, playedGame);
-		}
-	});
-	games.forEach((game) => {
-		// Ensure the game actually has been played
-		let lastPlayedGame = latestGamesMap.get(game.id);
-		if (lastPlayedGame) {
-			game.lastPlayedGame = lastPlayedGame;
-			game.lastPlayedAgo = timeAgo(game.lastPlayedGame.play_date);
-		} else {
-			game.lastPlayedGame = null;
-			game.lastPlayedAgo = "Ikke spillet endnu";
-		}
 
-		game.playedCount = gamePlayedCountMap.get(game.id) || 0;
-	});
-	return games;
- */
+function queryGameFromId(id) {
+	const game = QUERY_GAME_FROM_ID.get(id);
+	return game;
+}
+
 // Export the functions for usage
-module.exports = { queryAllGameDetails };
+module.exports = { queryAllGameDetails, queryGameFromId };

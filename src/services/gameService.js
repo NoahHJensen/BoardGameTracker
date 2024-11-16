@@ -1,5 +1,4 @@
 // Responsible for handling data directly from the database and convert to usable stuff.
-const dbFake = require("../dummyData"); // Dummy database for now... shhh
 const db = require("../db/database");
 
 /**
@@ -11,8 +10,8 @@ function getAllGameDetails() {
 }
 
 function getGameFromId(id) {
-	let games = dbFake.games;
-	return games.find((game) => game.id == id);
+	let game = db.queryGameFromId(id);
+	return game;
 }
 
 module.exports = {

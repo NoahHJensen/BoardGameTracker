@@ -20,14 +20,12 @@
 				<div class="columns">
 					<div class="column is-one-quarter">
 						<figure class="image is-4by5">
-							<img src="<%= game.imgSource %>" class="img-content" />
+							<img src="<%= game.img_source %>" class="img-content" />
 						</figure>
 					</div>
 					<div class="column">
 						<div class="content">
-							<p class="title">
-								Viser spil statistik for <%= game.gameTitle %>
-							</p>
+							<p class="title">Viser spil statistik for <%= game.title %></p>
 							<p class="subtitle">Spil beskrivelse: <%= game.description %></p>
 						</div>
 					</div>
@@ -37,7 +35,7 @@
 		<!--Plays section-->
 		<section class="section">
 			<div class="container">
-				<p class="title">Viser alle spillede spil for <%= game.gameTitle %></p>
+				<p class="title">Viser alle spillede spil for <%= game.title %></p>
 				<table class="table">
 					<thead>
 						<tr>
