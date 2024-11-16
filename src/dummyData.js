@@ -109,36 +109,43 @@ let playedGames = [
 		id: 1,
 		game_id: 1,
 		play_date: "2024-08-31",
+		winner_id: 1,
 	},
 	{
 		id: 2,
 		game_id: 1,
 		play_date: "2024-09-07",
+		winner_id: 3,
 	},
 	{
 		id: 3,
 		game_id: 2,
 		play_date: "2024-09-21",
+		winner_id: 1,
 	},
 	{
 		id: 4,
 		game_id: 3,
 		play_date: "2024-10-03",
+		winner_id: 2,
 	},
 	{
 		id: 5,
 		game_id: 3,
 		play_date: "2024-10-10",
+		winner_id: 1,
 	},
 	{
 		id: 6,
 		game_id: 4,
 		play_date: "2024-10-15",
+		winner_id: 2,
 	},
 	{
 		id: 7,
 		game_id: 1,
 		play_date: "2024-11-29",
+		winner_id: 1,
 	},
 ];
 

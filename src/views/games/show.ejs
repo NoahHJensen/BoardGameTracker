@@ -34,6 +34,31 @@
 				</div>
 			</div>
 		</section>
+		<!--Plays section-->
+		<section class="section">
+			<div class="container">
+				<p class="title">Viser alle spillede spil for <%= game.gameTitle %></p>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Dato</th>
+							<th>Vinder</th>
+						</tr>
+					</thead>
+					<tfoot></tfoot>
+					<tbody>
+						<% plays.forEach(play => { %>
+						<tr>
+							<th><%= play.id %></th>
+							<td><%= play.play_date %></td>
+							<td><%= play.winnerName %></td>
+						</tr>
+						<% }) %>
+					</tbody>
+				</table>
+			</div>
+		</section>
 
 		<%- include('../partials/footer') %>
 	</body>

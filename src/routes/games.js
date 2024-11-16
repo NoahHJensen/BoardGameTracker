@@ -6,6 +6,7 @@ const router = express.Router();
 const db = require("../dummyData");
 
 const gameService = require("../services/gameService");
+const playService = require("../services/playService");
 
 router.get("/", (req, res) => {
 	const games = gameService.getAllGameDetails();
@@ -17,8 +18,10 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:gameid", (req, res) => {
-	const game = gameService.getGameFromId(req.params.gameid);
-	res.render("games/show", { game });
+	let gameId = req.params.gameid;
+	const game = gameService.getGameFromId(gameId);
+	const plays = playService.getAllPlayedGameDetailsForGameId(gameId);
+	res.render("games/show", { game, plays });
 });
 
 module.exports = router;
