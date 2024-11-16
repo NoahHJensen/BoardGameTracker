@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="dk">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('../partials/libs') %>
+		<title>Spil information</title>
+	</head>
+	<style>
+		.img-container {
+			width: 123px;
+			height: 150px;
+		}
+	</style>
+	<body>
+		<%- include('../partials/header') %>
+
+		<section class="section">
+			<div class="container">
+				<div class="card">
+					<div class="card-content">
+						<div class="media">
+							<div class="media-left">
+								<figure class="image is-4by5 img-container">
+									<img
+										src="<%= play.img_source %>"
+										alt="<%= play.title %> cover image" />
+								</figure>
+							</div>
+							<div class="media-content">
+								<p class="title is-4"><%= play.title %></p>
+								<p class="subtitle is-6">
+									<strong>Spildato:</strong> <%= play.played_date %> (<%=
+									play.timeAgo %>)
+								</p>
+								<p class="subtitle is-6">
+									<strong>Vinder:</strong> <%= play.winner_name %>
+								</p>
+							</div>
+						</div>
+
+						<div class="content">
+							<h5 class="title is-5">Resultater:</h5>
+							<table class="table is-fullwidth is-striped">
+								<thead>
+									<tr>
+										<th>Spiller</th>
+										<th>Score</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% play.allPlays.forEach(function(player) { %>
+									<tr>
+										<td><%= player.player_name %></td>
+										<td><%= player.score %></td>
+									</tr>
+									<% }); %>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<%- include('../partials/footer') %>
+	</body>
+</html>

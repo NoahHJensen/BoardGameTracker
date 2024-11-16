@@ -6,6 +6,11 @@
 		<%- include('../partials/libs.ejs') %>
 		<title>Spillet spil</title>
 	</head>
+	<style>
+		.tr-content {
+			cursor: pointer;
+		}
+	</style>
 	<body>
 		<%- include('../partials/header.ejs') %>
 		<section class="section">
@@ -24,7 +29,7 @@
 						</thead>
 						<tbody>
 							<% playedGames.forEach((game, index) => { %>
-							<tr>
+							<tr class="tr-content" onclick="viewGame('<%= game.id %>')">
 								<td><%= index + 1 %></td>
 								<td><%= game.title %></td>
 								<td><%= game.played_date %></td>
@@ -39,4 +44,9 @@
 		</section>
 		<%- include('../partials/footer.ejs') %>
 	</body>
+	<script>
+		function viewGame(id) {
+			window.location.href = `/played-games/info/${id}`;
+		}
+	</script>
 </html>

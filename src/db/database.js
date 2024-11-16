@@ -57,6 +57,18 @@ const QUERY_ALL_PLAYED_GAME_DETAILS = db.prepare(`
     LEFT JOIN players ON players.id = played_games.winner_id
     LEFT JOIN games ON games.id = played_games.game_id;`);
 
+const QUERY_IMG_SOURCE_FROM_GAME_ID = db.prepare(
+	`SELECT img_source FROM games WHERE games.id = ?`
+);
+const QUERY_ALL_PLAYS_FROM_PLAYED_GAME_ID = db.prepare(
+	`SELECT 
+        plays.*,
+        players.name AS player_name
+    FROM plays
+    JOIN players ON players.id = plays.player_id
+    WHERE plays.played_game_id = ?`
+);
+
 const INSERT_INTO_GAMES = db.prepare(
 	"INSERT INTO games (title, description, img_source) VALUES (?, ?, ?)"
 );
@@ -99,6 +111,16 @@ function insertNewGame(title, desc, url) {
 	INSERT_INTO_GAMES.run(title, desc, url);
 }
 
+function queryImgSourceFromGameId(id) {
+	const imgSource = QUERY_IMG_SOURCE_FROM_GAME_ID.get(id);
+	return imgSource;
+}
+
+function queryPlaysFromPlayedGameId(id) {
+	const plays = QUERY_ALL_PLAYS_FROM_PLAYED_GAME_ID.all(id);
+	return plays;
+}
+
 // Export the functions for usage
 module.exports = {
 	queryAllGameDetails,
@@ -106,4 +128,6 @@ module.exports = {
 	queryAllPlayerDetails,
 	getAllPlayedGameDetails,
 	insertNewGame,
+	queryImgSourceFromGameId,
+	queryPlaysFromPlayedGameId,
 };

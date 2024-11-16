@@ -18,4 +18,20 @@ function getAllPlayedGameDetailsForGameId(gameId) {
 	return filteredGames;
 }
 
-module.exports = { getAllPlayedGameDetails, getAllPlayedGameDetailsForGameId };
+function getAllDetailsForPlayedGameId(playedGameId) {
+	// Get all the details for this played game's id
+	const allPlayedGames = getAllPlayedGameDetails();
+	const onePlayedGame = allPlayedGames.find((game) => game.id == playedGameId);
+	onePlayedGame.img_source = db.queryImgSourceFromGameId(
+		onePlayedGame.game_id
+	).img_source;
+	onePlayedGame.allPlays = db.queryPlaysFromPlayedGameId(playedGameId);
+	console.log(onePlayedGame);
+	return onePlayedGame;
+}
+
+module.exports = {
+	getAllPlayedGameDetails,
+	getAllPlayedGameDetailsForGameId,
+	getAllDetailsForPlayedGameId,
+};

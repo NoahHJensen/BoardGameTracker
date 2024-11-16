@@ -15,4 +15,11 @@ router.get("/", (req, res) => {
 	});
 	res.render("../views/playedGames/index", { playedGames });
 });
+
+// Route for viewing an individual played game
+router.get("/info/:playid", (req, res) => {
+	const play_id = req.params.playid;
+	const play = playService.getAllDetailsForPlayedGameId(play_id);
+	res.render("../views/playedGames/show", { play });
+});
 module.exports = router;
