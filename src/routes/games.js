@@ -1,10 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-// Retrieve our db data
-// Use dummy data for now
-const db = require("../dummyData");
-
 const gameService = require("../services/gameService");
 const playService = require("../services/playService");
 
