@@ -30,8 +30,11 @@ function getAllDetailsForPlayedGameId(playedGameId) {
 	return onePlayedGame;
 }
 
+function createNewPlayedGame() {}
+
 module.exports = {
 	getAllPlayedGameDetails,
 	getAllPlayedGameDetailsForGameId,
 	getAllDetailsForPlayedGameId,
+	createNewPlayedGame,
 };

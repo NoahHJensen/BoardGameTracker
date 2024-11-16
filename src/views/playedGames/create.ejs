@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="dk">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('../partials/libs') %>
+		<title>Tilføj Nyt Spillet Spil</title>
+	</head>
+	<body>
+		<%- include('../partials/header') %>
+
+		<section class="section">
+			<div class="container">
+				<h1 class="title">Tilføj Nyt Spillet Spil</h1>
+				<form action="/played-games/new" method="POST">
+					<div class="field">
+						<label class="label">Spildato</label>
+						<div class="control">
+							<input class="input" type="date" name="played_date" required />
+						</div>
+					</div>
+
+					<div class="field">
+						<label class="label">Vinder</label>
+						<div class="control">
+							<div class="select">
+								<select name="winner[id]" required>
+									<option value="">Vælg en vinder</option>
+									<% players.forEach(player => { %>
+									<option value="<%= player.id %>"><%= player.name %></option>
+									<% }); %>
+								</select>
+							</div>
+						</div>
+						<div class="control">
+							<input
+								class="input"
+								type="number"
+								name="winner[score]"
+								placeholder="Vinderens score"
+								min="0"
+								required />
+						</div>
+					</div>
+
+					<h2 class="subtitle mt-5">Tilføj Spillere og Scores</h2>
+					<div id="player-score-section"></div>
+
+					<button type="button" class="button is-link mt-3" id="add-player-btn">
+						Tilføj en spiller
+					</button>
+
+					<div class="field mt-5">
+						<div class="control">
+							<button type="submit" class="button is-primary">
+								Tilføj Spillet Spil
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				let playerIndex = 1;
+				const addPlayerBtn = document.getElementById("add-player-btn");
+				const playerScoreSection = document.getElementById(
+					"player-score-section"
+				);
+
+				addPlayerBtn.addEventListener("click", () => {
+					const newEntry = document.createElement("div");
+					newEntry.classList.add("field", "is-grouped", "player-score-entry");
+					newEntry.innerHTML = `
+            <div class="control">
+                <div class="select">
+                    <select name="players[${playerIndex}][id]" required>
+                        <option value="">Vælg en spiller</option>
+                        <% players.forEach(player => { %>
+                            <option value="<%= player.id %>"><%= player.name %></option>
+                        <% }); %>
+                    </select>
+                </div>
+            </div>
+            <div class="control">
+                <input class="input" type="number" name="players[${playerIndex}][score]" placeholder="Score" required>
+            </div>
+            <div class="control">
+                <button type="button" class="button is-danger remove-player-btn">Fjern spiller</button>
+            </div>
+        `;
+					playerScoreSection.appendChild(newEntry);
+					playerIndex++;
+
+					// Add event listener for the "Remove" button
+					const removeButton = newEntry.querySelector(".remove-player-btn");
+					removeButton.addEventListener("click", () => {
+						newEntry.remove();
+					});
+				});
+			});
+		</script>
+
+		<%- include('../partials/footer') %>
+	</body>
+</html>

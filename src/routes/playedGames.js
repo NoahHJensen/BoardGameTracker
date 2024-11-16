@@ -3,6 +3,7 @@ const router = express.Router();
 
 // Get the services
 const playService = require("../services/playService");
+const playerService = require("../services/playerService");
 
 // Default route for /played-games
 router.get("/", (req, res) => {
@@ -13,13 +14,26 @@ router.get("/", (req, res) => {
 		// to get a value that is either negative, positive, or zero.
 		return new Date(b.played_date) - new Date(a.played_date);
 	});
-	res.render("../views/playedGames/index", { playedGames });
+	res.render("playedGames/index", { playedGames });
 });
 
 // Route for viewing an individual played game
 router.get("/info/:playid", (req, res) => {
 	const play_id = req.params.playid;
 	const play = playService.getAllDetailsForPlayedGameId(play_id);
-	res.render("../views/playedGames/show", { play });
+	res.render("playedGames/show", { play });
+});
+
+// Route for creating a new played game
+router.get("/new", (req, res) => {
+	const players = playerService.getAllPlayerDetails();
+	res.render("playedGames/create", { players });
+});
+
+// POST request route for creating a played game
+router.post("/new", (req, res) => {
+	console.log(req.body);
+	playService.createNewPlayedGame();
+	res.redirect("/played-games/new");
 });
 module.exports = router;
