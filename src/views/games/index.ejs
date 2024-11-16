@@ -17,8 +17,13 @@
 		</section>
 		<section class="section">
 			<div class="container">
-				<h1 class="title"></h1>
+				<button class="button" onclick="createGame()">Tilføj nyt spil</button>
+			</div>
+		</section>
 
+		<section class="section">
+			<div class="container">
+				<p class="title">Alle spil</p>
 				<% games.forEach(game=> { %>
 				<div class="box">
 					<article class="media">
@@ -38,9 +43,6 @@
 									<span class="tag is-link is-medium">
 										Sidst spillet: <%= game.lastPlayedAgo %>
 									</span>
-									<span class="tag is-success is-medium">
-										Rating: <%= game.rating %>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -59,7 +61,10 @@
 	</body>
 	<script>
 		function viewGame(id) {
-			window.location.href = `/games/${id}`;
+			window.location.href = `/games/info/${id}`;
+		}
+		function createGame() {
+			window.location.href = "/games/create";
 		}
 	</script>
 </html>

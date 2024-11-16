@@ -13,11 +13,16 @@ router.get("/", (req, res) => {
 	});
 });
 
-router.get("/:gameid", (req, res) => {
+router.get("/info/:gameid", (req, res) => {
 	let gameId = req.params.gameid;
 	const game = gameService.getGameFromId(gameId);
 	const plays = playService.getAllPlayedGameDetailsForGameId(gameId);
 	res.render("games/show", { game, plays });
+});
+
+// Route for adding a new game to the collection
+router.get("/create", (req, res) => {
+	res.render("games/create", {});
 });
 
 module.exports = router;
