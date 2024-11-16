@@ -61,6 +61,9 @@ function createNewPlayedGame(data) {
 	}
 	//Create all the plays:
 	//First add winner to players:
+	if (!data.players) {
+		data.players = [];
+	}
 	data.players.push(data.winner);
 	//loop through each player and add as a play:
 	data.players.forEach((player) => {
