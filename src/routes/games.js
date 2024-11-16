@@ -25,4 +25,9 @@ router.get("/create", (req, res) => {
 	res.render("games/create", {});
 });
 
+// POST req Route for form submit
+router.post("/create", (req, res) => {
+	res.redirect("/");
+});
+
 module.exports = router;
