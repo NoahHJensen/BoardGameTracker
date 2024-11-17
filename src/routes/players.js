@@ -10,4 +10,14 @@ router.get("/", (req, res) => {
 	res.render("players/index", { players });
 });
 
+// Route for creating a new player
+router.get("/new", (req, res) => {
+	res.render("players/create");
+});
+
+// POST Request for adding a new player
+router.post("/new", (req, res) => {
+	res.redirect("/players");
+});
+
 module.exports = router;

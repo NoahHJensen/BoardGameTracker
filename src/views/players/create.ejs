@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="dk">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('../partials/libs') %>
+		<title>Ny spiller</title>
+	</head>
+	<body>
+		<%- include('../partials/header') %>
+		<!-- Main Container -->
+		<section class="section">
+			<div class="container">
+				<h1 class="title is-3">Opret en ny spiller</h1>
+
+				<!-- Form to create a new player -->
+				<form action="/players/new" method="POST">
+					<div class="field">
+						<label class="label">Navn</label>
+						<div class="control">
+							<input
+								class="input"
+								type="text"
+								name="name"
+								placeholder="Indtast spillerens navn"
+								required />
+						</div>
+					</div>
+
+					<div class="field is-grouped">
+						<div class="control">
+							<button class="button is-link">Opret spiller</button>
+						</div>
+						<div class="control">
+							<a href="/" class="button is-text">Afslut</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+		<%- include('../partials/footer') %>
+	</body>
+</html>
