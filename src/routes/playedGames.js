@@ -34,7 +34,6 @@ router.get("/new", (req, res) => {
 
 // POST request route for creating a played game
 router.post("/new", (req, res) => {
-	console.log(req.body);
 	playService.createNewPlayedGame(req.body);
 	res.redirect("/played-games/new");
 });

@@ -17,6 +17,7 @@ router.get("/new", (req, res) => {
 
 // POST Request for adding a new player
 router.post("/new", (req, res) => {
+	playerService.createNewPlayer(req.body.name);
 	res.redirect("/players");
 });
 

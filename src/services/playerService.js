@@ -9,4 +9,11 @@ function getAllPlayerDetails() {
 	return playerDetails;
 }
 
-module.exports = { getAllPlayerDetails };
+/**
+ * Inserts a new player into the database
+ */
+function createNewPlayer(name) {
+	return db.insertNewPlayer(name).lastInsertRowid;
+}
+
+module.exports = { getAllPlayerDetails, createNewPlayer };

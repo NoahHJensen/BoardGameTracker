@@ -81,6 +81,7 @@ const INSERT_INTO_PLAYED_GAMES = db.prepare(
 const INSERT_INTO_PLAYS = db.prepare(
 	"INSERT INTO plays (played_game_id, player_id, score) VALUES (?, ?, ?)"
 );
+const INSERT_INTO_PLAYERS = db.prepare("INSERT INTO players (name) VALUES (?)");
 /**
  * Utility functions
  */
@@ -145,6 +146,11 @@ function insertNewPlay(played_game_id, player_id, score) {
 	const result = INSERT_INTO_PLAYS.run(played_game_id, player_id, score);
 	return result.lastInsertRowid;
 }
+function insertNewPlayer(name) {
+	//TODO: Check if name already exists
+	const result = INSERT_INTO_PLAYERS.run(name);
+	return result;
+}
 
 // Export the functions for usage
 module.exports = {
@@ -158,4 +164,5 @@ module.exports = {
 	insertNewPlay,
 	insertNewPlayedGame,
 	queryPlayedGameFromId,
+	insertNewPlayer,
 };
