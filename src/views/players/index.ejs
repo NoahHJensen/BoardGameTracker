@@ -50,6 +50,10 @@
 								<span class="tag is-dark is-large">Vundet procent</span>
 								<% let winPercentage = Math.round(((player.games_won /
 								player.games_played) * 100)*100)/100%>
+								<strong
+									class="tag <% if (winPercentage >= 50) { %> is-success <% } else { %> is-danger <% } %>is-large">
+									<%= winPercentage %>%</strong
+								>
 							</div>
 						</div>
 						<% } %>
