@@ -71,6 +71,26 @@ const QUERY_ALL_PLAYS_FROM_PLAYED_GAME_ID = db.prepare(
 const QUERY_PLAYED_GAME_FROM_ID = db.prepare(
 	"SELECT * FROM played_games WHERE played_games.id = ?"
 );
+const QUERY_ALL_PLAYED_GAME_DETAILS_FOR_PLAYER_ID = db.prepare(`
+    SELECT 
+        g.id AS game_id,
+        g.title AS game_title,
+        g.description AS game_description,
+        g.img_source AS game_img_source,
+        pg.played_date,
+        pg.winner_id,
+        p.name AS winner_name,
+        pl.score AS player_score
+    FROM 
+        plays pl
+    JOIN 
+        played_games pg ON pl.played_game_id = pg.id
+    JOIN 
+        games g ON pg.game_id = g.id
+    LEFT JOIN 
+        players p ON pg.winner_id = p.id
+    WHERE 
+        pl.player_id = ?;`);
 
 const INSERT_INTO_GAMES = db.prepare(
 	"INSERT INTO games (title, description, img_source) VALUES (?, ?, ?)"
@@ -151,6 +171,10 @@ function insertNewPlayer(name) {
 	const result = INSERT_INTO_PLAYERS.run(name);
 	return result;
 }
+function queryAllPlayedGameDetailsForPlayerId(player_id) {
+	const result = QUERY_ALL_PLAYED_GAME_DETAILS_FOR_PLAYER_ID.all(player_id);
+	return result;
+}
 
 // Export the functions for usage
 module.exports = {
@@ -165,4 +189,5 @@ module.exports = {
 	insertNewPlayedGame,
 	queryPlayedGameFromId,
 	insertNewPlayer,
+	queryAllPlayedGameDetailsForPlayerId,
 };

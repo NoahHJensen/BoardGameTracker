@@ -3,11 +3,21 @@ const router = express.Router();
 
 // Get all the services needed
 const playerService = require("../services/playerService");
+const playService = require("../services/playService");
 
 // Default /players route
 router.get("/", (req, res) => {
 	let players = playerService.getAllPlayerDetails();
 	res.render("players/index", { players });
+});
+
+router.get("/player/:id", (req, res) => {
+	const player_id = req.params.id;
+	const played_games =
+		playService.getAllPlayedGameDetailsForPlayerId(player_id);
+	const allPlayerDetails = playerService.getAllPlayerDetails();
+	const player = allPlayerDetails.find((player) => player.id == player_id);
+	res.render("players/player", { played_games, player });
 });
 
 // Route for creating a new player

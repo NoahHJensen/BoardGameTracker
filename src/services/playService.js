@@ -75,9 +75,18 @@ function createNewPlayedGame(data) {
 	return played_game_id;
 }
 
+function getAllPlayedGameDetailsForPlayerId(id) {
+	const result = db.queryAllPlayedGameDetailsForPlayerId(id);
+	result.forEach((played_game) => {
+		played_game.timeAgo = timeAgo(played_game.played_date);
+	});
+	return result;
+}
+
 module.exports = {
 	getAllPlayedGameDetails,
 	getAllPlayedGameDetailsForGameId,
 	getAllDetailsForPlayedGameId,
 	createNewPlayedGame,
+	getAllPlayedGameDetailsForPlayerId,
 };

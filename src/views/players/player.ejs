@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="dk">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,9 +8,121 @@
 	</head>
 	<body>
 		<%- include('../partials/header') %>
+		<section class="hero is-primary is-bold">
+			<div class="hero-body">
+				<div class="container">
+					<h1 class="title">Spilhistorik for <%= player.name %></h1>
+					<h2 class="subtitle">Se alle de spil, du har spillet for nylig.</h2>
+				</div>
+			</div>
+		</section>
 		<section class="section">
-			<h1 class="title">Spiller</h1>
+			<div class="container">
+				<h2 class="title is-4 has-text-centered">Spiller information</h2>
+				<table class="table is-bordered is-striped is-hoverable is-fullwidth">
+					<thead>
+						<tr>
+							<th>Navn</th>
+							<th>Spillet</th>
+							<th>Vundet</th>
+							<th>Tabt</th>
+							<th>Vinder procent</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<% const games_lost = player.games_played - player.games_won%> <%
+							let win_percentage = Math.round(((player.games_won /
+							player.games_played) * 100)*100)/100%>
+							<td><%= player.name %></td>
+							<td>
+								<strong class="tag is-large"><%= player.games_played %></strong>
+							</td>
+							<td>
+								<strong class="tag is-success is-large"
+									><%= player.games_won %></strong
+								>
+							</td>
+							<td>
+								<strong class="tag is-danger is-large"
+									><%= games_lost %></strong
+								>
+							</td>
+							<td>
+								<strong
+									class="tag <% if (win_percentage >= 50) { %> is-success <% } else { %> is-danger <% } %>is-large">
+									<%= win_percentage %>%</strong
+								>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+		<section class="section">
+			<div class="container">
+				<h2 class="title is-4 has-text-centered has-text-weight-bold">
+					Spil, du har spillet:
+				</h2>
+
+				<div class="box">
+					<table class="table is-striped is-hoverable is-fullwidth">
+						<thead>
+							<tr>
+								<th class="has-text-centered">Spil navn</th>
+								<th class="has-text-centered">Dato</th>
+								<th class="has-text-centered">Spillet for</th>
+								<th class="has-text-centered">Vinder</th>
+								<th class="has-text-centered">Score</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% played_games.forEach(function(game) { %>
+							<tr>
+								<td class="">
+									<p class="has-text-weight-semibold" style="line-height: 1.2">
+										<%= game.game_title %>
+									</p>
+								</td>
+
+								<td class="has-text-centered"><%= game.played_date %></td>
+								<td class="has-text-centered"><%= game.timeAgo %></td>
+								<td class="has-text-centered">
+									<span class="tag is-success is-light">
+										<%= game.winner_name %></span
+									>
+								</td>
+
+								<td class="has-text-centered">
+									<span class="has-text-weight-semibold is-size-5">
+										<%= game.player_score %></span
+									>
+								</td>
+							</tr>
+							<% }); %>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</section>
 		<%- include('../partials/footer') %>
 	</body>
+	<style>
+		.table tbody tr:hover {
+			background-color: #f5f5f5; /* Light gray hover effect */
+			transition: background-color 0.3s ease;
+		}
+
+		.image img {
+			transition: transform 0.3s ease;
+		}
+
+		.image img:hover {
+			transform: scale(1.05); /* Slight zoom-in effect on hover */
+		}
+
+		.tag {
+			font-weight: bold;
+		}
+	</style>
 </html>

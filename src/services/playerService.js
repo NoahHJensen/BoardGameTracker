@@ -1,6 +1,9 @@
 // Responsible for all player related data.
 const db = require("../db/database");
 
+// Util functions
+const timeAgo = require("../utils/timeAgo");
+
 /**
  * Returns all players including gamesPlayed, gamesWon
  */
@@ -16,4 +19,7 @@ function createNewPlayer(name) {
 	return db.insertNewPlayer(name).lastInsertRowid;
 }
 
-module.exports = { getAllPlayerDetails, createNewPlayer };
+module.exports = {
+	getAllPlayerDetails,
+	createNewPlayer,
+};
