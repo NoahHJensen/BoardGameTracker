@@ -15,7 +15,13 @@
 			</div>
 		</section>
 		<section class="section">
-			<h1 class="subtitle">Tryk på spilleren for at få mere information!</h1>
+			<div class="content has-text-centered">
+				<p class="subtitle">Tryk på spilleren for at få mere information!</p>
+				<button class="button" onclick="window.location.href = '/players/new'">
+					Ny spiller
+				</button>
+			</div>
+
 			<div class="container">
 				<% players.forEach(player => { %>
 				<div class="box">
