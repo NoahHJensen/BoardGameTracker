@@ -1,8 +1,9 @@
+require("dotenv").config();
 const Database = require("better-sqlite3");
 // Responsible for interacting with the actual database
-
+const dbName = process.env.DB || "bgtracker.db";
 // Get a connection to the database
-const db = new Database("src/db/bgtracker.db");
+const db = new Database("src/db/" + dbName);
 
 /**
  * Prepare SQL statements
