@@ -1,11 +1,13 @@
 // Responsible for all played game related data
-const db = require("../db/database");
+const playedGameModel = require("../models/playedGameModel");
+const playsModel = require("../models/playsModel");
+const gameModel = require("../models/gameModel");
 
 //Helper util function
 const timeAgo = require("../utils/timeAgo");
 
 function getAllPlayedGameDetails() {
-	const plays = db.getAllPlayedGameDetails();
+	const plays = playedGameModel.getAllPlayedGameDetails();
 	plays.forEach((play) => {
 		play.timeAgo = timeAgo(play.played_date);
 	});
@@ -22,10 +24,10 @@ function getAllDetailsForPlayedGameId(playedGameId) {
 	// Get all the details for this played game's id
 	const allPlayedGames = getAllPlayedGameDetails();
 	const onePlayedGame = allPlayedGames.find((game) => game.id == playedGameId);
-	onePlayedGame.img_source = db.queryImgSourceFromGameId(
+	onePlayedGame.img_source = gameModel.queryImgSourceFromGameId(
 		onePlayedGame.game_id
 	).img_source;
-	onePlayedGame.allPlays = db.queryPlaysFromPlayedGameId(playedGameId);
+	onePlayedGame.allPlays = playsModel.queryPlaysFromPlayedGameId(playedGameId);
 	return onePlayedGame;
 }
 
@@ -47,13 +49,14 @@ function createNewPlayedGame(data) {
 	const winner_id = data.winner.id;
 	const game_id = data.game_id;
 	// Insert the played game
-	const played_game_id = db.insertNewPlayedGame(
+	const played_game_id = playedGameModel.insertNewPlayedGame(
 		played_date,
 		game_id,
 		winner_id
 	);
 	// Check if it was created:
-	const newlyCreatedPlayedGame = db.queryPlayedGameFromId(played_game_id);
+	const newlyCreatedPlayedGame =
+		playedGameModel.queryPlayedGameFromId(played_game_id);
 	if (!newlyCreatedPlayedGame) {
 		console.error("No game found");
 		return;
@@ -66,7 +69,7 @@ function createNewPlayedGame(data) {
 	data.players.push(data.winner);
 	//loop through each player and add as a play:
 	data.players.forEach((player) => {
-		db.insertNewPlay(
+		playsModel.insertNewPlay(
 			played_game_id,
 			player.id,
 			player.score ? player.score : 0
@@ -76,7 +79,7 @@ function createNewPlayedGame(data) {
 }
 
 function getAllPlayedGameDetailsForPlayerId(id) {
-	const result = db.queryAllPlayedGameDetailsForPlayerId(id);
+	const result = playedGameModel.queryAllPlayedGameDetailsForPlayerId(id);
 	result.forEach((played_game) => {
 		played_game.timeAgo = timeAgo(played_game.played_date);
 	});
