@@ -4,6 +4,9 @@ const path = require("path");
 
 const app = express();
 
+// Serve static files from the public folder:
+app.use(express.static(path.join(__dirname, "public")));
+
 // Middleware for parsing URL-encoded data (from forms)
 app.use(express.urlencoded({ extended: true }));
 
