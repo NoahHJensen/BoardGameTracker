@@ -1,5 +1,5 @@
 //Get the database connection.
-const db = require("../db/databaseConnection");
+const db = require("../config/databaseConnection");
 
 // import timeAgo utility function
 const timeAgo = require("../utils/timeAgo");

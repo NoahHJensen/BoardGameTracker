@@ -1,5 +1,5 @@
 // Get a connection to the database.
-const db = require("../db/databaseConnection");
+const db = require("../config/databaseConnection");
 
 /**
  * Prepare all the queries.
