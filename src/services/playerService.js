@@ -5,7 +5,7 @@ const playerModel = require("../models/playerModel");
  * Returns all players including gamesPlayed, gamesWon
  */
 function getAllPlayerDetails() {
-	let playerDetails = db.queryAllPlayerDetails();
+	let playerDetails = playerModel.queryAllPlayerDetails();
 	return playerDetails;
 }
 
@@ -13,7 +13,7 @@ function getAllPlayerDetails() {
  * Inserts a new player into the database
  */
 function createNewPlayer(name) {
-	return db.insertNewPlayer(name).lastInsertRowid;
+	return playerModel.insertNewPlayer(name).lastInsertRowid;
 }
 
 module.exports = {
