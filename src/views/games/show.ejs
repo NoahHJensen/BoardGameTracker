@@ -9,12 +9,18 @@
 	<style>
 		.img-content {
 			width: 246px;
-			height: 300px;
 		}
 	</style>
 
 	<body>
 		<%- include('../partials/header') %>
+		<section class="hero is-primary">
+			<div class="hero-body">
+				<button class="button is-dark is-pulled-right">Rediger</button>
+				<p class="title">Spil statistik for <%= game.title %></p>
+			</div>
+		</section>
+
 		<section class="section">
 			<div class="container">
 				<div class="columns">
@@ -32,6 +38,7 @@
 				</div>
 			</div>
 		</section>
+
 		<!--Plays section-->
 		<section class="section">
 			<div class="container">
