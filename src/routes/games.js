@@ -6,10 +6,11 @@ const playService = require("../services/playsService");
 
 router.get("/", (req, res) => {
 	const games = gameService.getAllGameDetails();
-
+	const totalGames = games.length;
 	res.render("games/index", {
 		title: "Brætspil overview",
 		games: games,
+		gamesTotal: totalGames,
 	});
 });
 
