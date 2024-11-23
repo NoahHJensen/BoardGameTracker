@@ -1,8 +1,5 @@
 // Responsible for all player related data.
-const db = require("../db/database");
-
-// Util functions
-const timeAgo = require("../utils/timeAgo");
+const playerModel = require("../models/playerModel");
 
 /**
  * Returns all players including gamesPlayed, gamesWon

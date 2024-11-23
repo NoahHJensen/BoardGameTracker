@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // Get the services
-const playService = require("../services/playService");
+const playService = require("../services/playsService");
 const playerService = require("../services/playerService");
 const gameService = require("../services/gameService");
 

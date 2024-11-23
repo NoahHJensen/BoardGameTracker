@@ -3,7 +3,7 @@ const router = express.Router();
 
 // Get all the services needed
 const playerService = require("../services/playerService");
-const playService = require("../services/playService");
+const playService = require("../services/playsService");
 
 // Default /players route
 router.get("/", (req, res) => {
