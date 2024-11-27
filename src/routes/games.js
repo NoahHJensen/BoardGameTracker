@@ -21,6 +21,16 @@ router.get("/info/:gameid", (req, res) => {
 	res.render("games/show", { game, plays });
 });
 
+router.post("/info/:gameid", (req, res) => {
+	console.log(req.body);
+	const gameId = req.params.gameid;
+	const newTitle = req.body.title;
+	const newImgSource = req.body.img_source;
+	const newDescription = req.body.description;
+	gameService.editGame(gameId, newTitle, newImgSource, newDescription);
+	res.redirect("/games/info/" + gameId);
+});
+
 // Route for adding a new game to the collection
 router.get("/create", (req, res) => {
 	res.render("games/create", {});

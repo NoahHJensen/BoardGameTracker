@@ -35,7 +35,10 @@
 				</header>
 				<section class="modal-card-body">
 					<!-- Form fields for editing game details -->
-					<form id="editGameForm">
+					<form
+						id="editGameForm"
+						action="/games/info/<%= game.id %>"
+						method="POST">
 						<div class="field">
 							<label class="label">Spillets titel</label>
 							<div class="control">

@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	modalBackground.addEventListener("click", closeModal);
 
 	saveGameBtn.addEventListener("click", () => {
-		// Example: Add custom form handling logic here
-		document.getElementById("editGameForm").submit(); // Submits the form
+		const confirm = window.confirm("Bekræft at du ville ændre spillet?");
+		if (confirm) {
+			document.getElementById("editGameForm").submit(); // Submits the form
+		}
 	});
 });
