@@ -34,6 +34,12 @@ const INSERT_INTO_GAMES = db.prepare(
 	"INSERT INTO games (title, description, img_source) VALUES (?, ?, ?)"
 );
 
+const UPDATE_GAME_ON_ID = db.prepare(`
+	UPDATE games
+	SET title = ?, description = ?, img_source = ?
+	WHERE id = ?
+	`);
+
 /**
  * Query all game details. Adds lastPlayedAgo to the games.
  * @returns All game details.
@@ -78,9 +84,21 @@ function queryImgSourceFromGameId(id) {
 	return imgSource;
 }
 
+/**
+ *
+ * @param {number} id the game id
+ * @param {string} title the games new title
+ * @param {string} url the new img_source of the game
+ * @param {string} desc the new description for the game
+ */
+function updateGameOnId(id, title, url, desc) {
+	UPDATE_GAME_ON_ID.run(title, desc, url, id);
+}
+
 module.exports = {
 	queryAllGameDetails,
 	queryGameFromId,
 	insertNewGame,
 	queryImgSourceFromGameId,
+	updateGameOnId,
 };

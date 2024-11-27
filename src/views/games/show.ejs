@@ -5,16 +5,89 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title><%= game.title %></title>
+
+		<!-- JavaScript to handle modal behavior -->
+		<script src="/js/editGameModalBehavior.js"></script>
 	</head>
 	<style>
 		.img-content {
 			width: 246px;
-			height: 300px;
 		}
 	</style>
 
 	<body>
 		<%- include('../partials/header') %>
+		<section class="hero is-info">
+			<div class="hero-body">
+				<button class="button is-dark is-pulled-right" id="editGameBtn">
+					Rediger
+				</button>
+				<p class="title">Spil statistik for <%= game.title %></p>
+			</div>
+		</section>
+		<!-- Modal for editing -->
+		<div class="modal" id="editGameModal">
+			<div class="modal-background" id="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Edit Game</p>
+					<button class="delete" aria-label="close" id="closeModalBtn"></button>
+				</header>
+				<section class="modal-card-body">
+					<!-- Form fields for editing game details -->
+					<form
+						id="editGameForm"
+						action="/games/info/<%= game.id %>"
+						method="POST">
+						<div class="field">
+							<label class="label">Spillets titel</label>
+							<div class="control">
+								<input
+									class="input"
+									type="text"
+									name="title"
+									id="gameTitle"
+									placeholder="Skriv spillets titel"
+									value="<%= game.title %>" />
+							</div>
+						</div>
+
+						<div class="field">
+							<label class="label">Billede URL</label>
+							<div class="control">
+								<input
+									class="input"
+									type="text"
+									name="img_source"
+									id="gameImgSource"
+									placeholder="Skriv billedets URL"
+									value="<%= game.img_source %>" />
+							</div>
+						</div>
+
+						<div class="field">
+							<label class="label">Beskrivelse</label>
+							<div class="control">
+								<textarea
+									class="textarea"
+									name="description"
+									id="gameDescription"
+									placeholder="Skriv en beskrivelse her">
+<%= game.description %></textarea
+								>
+							</div>
+						</div>
+					</form>
+				</section>
+				<footer class="modal-card-foot">
+					<button class="button is-success" id="saveGameBtn">
+						Gem ændringer
+					</button>
+					<button class="button" id="cancelModalBtn">Tilbage</button>
+				</footer>
+			</div>
+		</div>
+
 		<section class="section">
 			<div class="container">
 				<div class="columns">
@@ -32,6 +105,7 @@
 				</div>
 			</div>
 		</section>
+
 		<!--Plays section-->
 		<section class="section">
 			<div class="container">

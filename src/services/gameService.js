@@ -21,8 +21,13 @@ function addNewGameToDatabase(game) {
 	gameModel.insertNewGame(title, description, img_source);
 }
 
+function editGame(id, title, imgSource, description) {
+	gameModel.updateGameOnId(id, title, imgSource, description);
+}
+
 module.exports = {
 	getAllGameDetails,
 	getGameFromId,
 	addNewGameToDatabase,
+	editGame,
 };
