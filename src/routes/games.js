@@ -22,7 +22,6 @@ router.get("/info/:gameid", (req, res) => {
 });
 
 router.post("/info/:gameid", (req, res) => {
-	console.log(req.body);
 	const gameId = req.params.gameid;
 	const newTitle = req.body.title;
 	const newImgSource = req.body.img_source;
