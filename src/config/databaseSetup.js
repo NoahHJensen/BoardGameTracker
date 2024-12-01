@@ -48,7 +48,7 @@ function createTables() {
       played_game_id INTEGER,
       player_id INTEGER,
       score INTEGER,
-      FOREIGN KEY (played_game_id) REFERENCES played_games(id),
+      FOREIGN KEY (played_game_id) REFERENCES played_games(id) ON DELETE CASCADE,
       FOREIGN KEY (player_id) REFERENCES players(id)
     );
   `
