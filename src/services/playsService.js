@@ -86,10 +86,15 @@ function getAllPlayedGameDetailsForPlayerId(id) {
 	return result;
 }
 
+function deletePlayedGame(id) {
+	return playedGameModel.deletePlayedGame(id);
+}
+
 module.exports = {
 	getAllPlayedGameDetails,
 	getAllPlayedGameDetailsForGameId,
 	getAllDetailsForPlayedGameId,
 	createNewPlayedGame,
 	getAllPlayedGameDetailsForPlayerId,
+	deletePlayedGame,
 };

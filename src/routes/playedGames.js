@@ -35,6 +35,17 @@ router.get("/new", (req, res) => {
 // POST request route for creating a played game
 router.post("/new", (req, res) => {
 	playService.createNewPlayedGame(req.body);
-	res.redirect("/played-games/new");
+	res.redirect("/played-games");
+});
+
+// Delete route for
+router.delete("/delete/:playid", (req, res) => {
+	const playId = req.params.playid;
+	const result = playService.deletePlayedGame(playId);
+	if (result.success) {
+		res.status(200).json({ success: true, message: `Deleted play ${playId}` });
+	} else {
+		res.status(500).json({ success: result.success, message: result.message });
+	}
 });
 module.exports = router;

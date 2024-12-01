@@ -42,6 +42,7 @@ const QUERY_ALL_PLAYED_GAME_DETAILS_FOR_PLAYER_ID = db.prepare(`
 const INSERT_INTO_PLAYED_GAMES = db.prepare(
 	"INSERT INTO played_games (played_date, game_id, winner_id) VALUES (?, ?, ?)"
 );
+const DELETE_PLAYED_GAME = db.prepare("DELETE FROM played_games WHERE id = ?");
 
 /**
  * All functions
@@ -79,9 +80,24 @@ function queryAllPlayedGameDetailsForPlayerId(player_id) {
 	return result;
 }
 
+function deletePlayedGame(id) {
+	try {
+		const result = DELETE_PLAYED_GAME.run(id);
+		if (result.changes === 0) {
+			// No rows deleted
+			return { success: false, message: "No record deleted" };
+		}
+		return { success: true, message: "Deleted played game successfully" };
+	} catch (error) {
+		console.error("Error deleting played game: ", error.message);
+		return { success: false, message: "Error occured while deleting the game" };
+	}
+}
+
 module.exports = {
 	getAllPlayedGameDetails,
 	queryPlayedGameFromId,
 	insertNewPlayedGame,
 	queryAllPlayedGameDetailsForPlayerId,
+	deletePlayedGame,
 };
