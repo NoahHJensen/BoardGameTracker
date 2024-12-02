@@ -45,10 +45,8 @@
 		</section>
 		<%- include('../partials/footer.ejs') %>
 	</body>
+	<script src="/js/viewGameFunc.js"></script>
 	<script>
-		function viewGame(id) {
-			window.location.href = `/played-games/info/${id}`;
-		}
 		function newGame() {
 			window.location.href = `/played-games/new`;
 		}
