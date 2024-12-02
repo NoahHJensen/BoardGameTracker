@@ -27,6 +27,7 @@ const QUERY_ALL_PLAYED_GAME_DETAILS_FOR_PLAYER_ID = db.prepare(`
         g.img_source AS game_img_source,
         pg.played_date,
         pg.winner_id,
+        pg.id,
         p.name AS winner_name,
         pl.score AS player_score
     FROM 

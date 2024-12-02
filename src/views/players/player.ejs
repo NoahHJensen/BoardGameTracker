@@ -5,7 +5,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<%- include('../partials/libs') %>
 		<title>Spiller statistik</title>
+		<script src="/js/viewGameFunc.js"></script>
 	</head>
+	<style>
+		.tr-content {
+			cursor: pointer;
+		}
+	</style>
 	<body>
 		<%- include('../partials/header') %>
 		<section class="hero is-primary is-bold">
@@ -78,7 +84,7 @@
 						</thead>
 						<tbody>
 							<% played_games.forEach(function(game) { %>
-							<tr>
+							<tr class="tr-content" onclick="viewGame('<%= game.id %>')">
 								<td class="">
 									<p class="has-text-weight-semibold" style="line-height: 1.2">
 										<%= game.game_title %>
