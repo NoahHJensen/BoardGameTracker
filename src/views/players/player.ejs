@@ -88,7 +88,8 @@
 								<td class="has-text-centered"><%= game.played_date %></td>
 								<td class="has-text-centered"><%= game.timeAgo %></td>
 								<td class="has-text-centered">
-									<span class="tag is-success is-light">
+									<span
+										class="tag <% if (game.winner_name == player.name) { %> is-success <% } else { %> is-danger<% } %>">
 										<%= game.winner_name %></span
 									>
 								</td>
@@ -107,22 +108,4 @@
 		</section>
 		<%- include('../partials/footer') %>
 	</body>
-	<style>
-		.table tbody tr:hover {
-			background-color: #f5f5f5; /* Light gray hover effect */
-			transition: background-color 0.3s ease;
-		}
-
-		.image img {
-			transition: transform 0.3s ease;
-		}
-
-		.image img:hover {
-			transform: scale(1.05); /* Slight zoom-in effect on hover */
-		}
-
-		.tag {
-			font-weight: bold;
-		}
-	</style>
 </html>
