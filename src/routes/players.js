@@ -15,6 +15,9 @@ router.get("/player/:id", (req, res) => {
 	const player_id = req.params.id;
 	const played_games =
 		playService.getAllPlayedGameDetailsForPlayerId(player_id);
+	played_games.sort(function (a, b) {
+		return new Date(b.played_date) - new Date(a.played_date);
+	});
 	const allPlayerDetails = playerService.getAllPlayerDetails();
 	const player = allPlayerDetails.find((player) => player.id == player_id);
 	res.render("players/player", { played_games, player });
