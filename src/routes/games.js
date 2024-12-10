@@ -18,7 +18,9 @@ router.get("/info/:gameid", (req, res) => {
 	let gameId = req.params.gameid;
 	const game = gameService.getGameFromId(gameId);
 	const plays = playService.getAllPlayedGameDetailsForGameId(gameId);
-	res.render("games/show", { game, plays });
+
+	const highscores = playService.getAllHighscoresForGameId(gameId);
+	res.render("games/show", { game, plays, highscores });
 });
 
 router.post("/info/:gameid", (req, res) => {

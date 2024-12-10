@@ -45,6 +45,22 @@ const INSERT_INTO_PLAYED_GAMES = db.prepare(
 );
 const DELETE_PLAYED_GAME = db.prepare("DELETE FROM played_games WHERE id = ?");
 
+const QUERY_ALL_PLAYED_GAME_HIGHSCORES_FOR_GAME_ID = db.prepare(`
+    SELECT 
+        players.id AS player_id, 
+        players.name AS player_name, 
+        MAX(plays.score) AS highest_score
+    FROM 
+        plays
+    JOIN 
+        played_games ON plays.played_game_id = played_games.id
+    JOIN 
+        players ON plays.player_id = players.id
+    WHERE 
+        played_games.game_id = ?
+    GROUP BY 
+        players.id, players.name;`);
+
 /**
  * All functions
  */
@@ -95,10 +111,15 @@ function deletePlayedGame(id) {
 	}
 }
 
+function queryAllHighscoresForGameId(id) {
+	return QUERY_ALL_PLAYED_GAME_HIGHSCORES_FOR_GAME_ID.all(id);
+}
+
 module.exports = {
 	getAllPlayedGameDetails,
 	queryPlayedGameFromId,
 	insertNewPlayedGame,
 	queryAllPlayedGameDetailsForPlayerId,
 	deletePlayedGame,
+	queryAllHighscoresForGameId,
 };

@@ -90,6 +90,11 @@ function deletePlayedGame(id) {
 	return playedGameModel.deletePlayedGame(id);
 }
 
+function getAllHighscoresForGameId(id) {
+	const result = playedGameModel.queryAllHighscoresForGameId(id);
+	return result;
+}
+
 module.exports = {
 	getAllPlayedGameDetails,
 	getAllPlayedGameDetailsForGameId,
@@ -97,4 +102,5 @@ module.exports = {
 	createNewPlayedGame,
 	getAllPlayedGameDetailsForPlayerId,
 	deletePlayedGame,
+	getAllHighscoresForGameId,
 };

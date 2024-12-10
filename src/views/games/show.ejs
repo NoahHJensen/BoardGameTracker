@@ -105,7 +105,28 @@
 				</div>
 			</div>
 		</section>
-
+		<section class="section">
+			<div class="container">
+				<p class="title">Highscores for <%= game.title %></p>
+				<table class="table is-fullwidth is-hoverable">
+					<thead>
+						<tr>
+							<th>Spiller</th>
+							<th>Score</th>
+						</tr>
+					</thead>
+					<tfoot></tfoot>
+					<tbody>
+						<% highscores.forEach(score => { %>
+						<tr>
+							<th><%= score.player_name %></th>
+							<td><%= score.highest_score %></td>
+						</tr>
+						<% }) %>
+					</tbody>
+				</table>
+			</div>
+		</section>
 		<!--Plays section-->
 		<section class="section">
 			<div class="container">
